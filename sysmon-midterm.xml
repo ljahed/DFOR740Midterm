@@ -1,0 +1,17 @@
+<!-- Leena Jahed -->
+<!-- DFOR 740 Midterm Sysmon Configuration -->
+
+<Sysmon schemaversion="4.90">
+	<EventFiltering>
+		<!-- Log all process creation -->
+		<ProcessCreate onmatch="include"/>
+		<!-- Log registry modifications under Service keys -->
+		<RegistryEvent onmatch="include">
+			<TargetObject condition="begin with">HKLM\System\CurrentControlSet\Services\</TargetObject>
+		</RegistryEvent>
+		<!-- Log file creation of the executable -->
+		<FileCreateTime onmatch="include">
+			<TargetFilename condition="end with">.exe</TargetFilename>
+		</FileCreateTime>
+	</EventFiltering>
+</Sysmon>
